@@ -1,0 +1,8 @@
+{
+  "strict": "global",
+  "latedef": true,
+  "browser": true,
+  "devel": true,
+  "sub": true,
+  "node": true
+}
