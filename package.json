@@ -1,8 +1,10 @@
 {
   "name": "spotipos-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "db-dump-data": "node ./scripts/db-dump-data",
+    "db-restore-data": "node ./scripts/db-restore-data"
   },
   "engines": {
     "node": "~6.7.0",

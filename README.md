@@ -22,10 +22,10 @@ Type in command prompt:
 
 ```sh
 #To development environment
-./scripts/db-restore-data.sh
+npm run db-restore-data
 
 #To production environment
-MONGODB_URI=mongodb://<username>:<password>@<host>:<port>/<database> ./scripts/db-restore-data.sh
+MONGODB_URI="mongodb://<username>:<password>@<host>:<port>/<database>" npm run db-restore-data
 
 #Replace the data between < and > with your own information.
 ```
@@ -68,7 +68,8 @@ and then in the REST client use the above API endpoints and parameters to check 
 
 
 ## Relase History
-
+*   1.0.1 _\[28/11/2016\]_
+    *   Replaced shell scripts by javascripts
 *   1.0.0 _\[27/11/2016\]_
     *   Initial version
 
