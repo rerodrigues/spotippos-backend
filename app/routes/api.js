@@ -11,11 +11,11 @@ var propertiesController = require('../controllers/properties'),
 // Properties
 router.route('/properties')
     .get(propertiesController.propertiesList)
+    .put(propertiesController.propertyUpdate)
     .post(propertiesController.propertyCreate);
 
 router.route('/properties/:id')
     .get(propertiesController.propertyRead)
-    .put(propertiesController.propertyUpdate)
     .delete(propertiesController.propertyDelete);
 
 // Provinces
