@@ -6,3 +6,6 @@
   "sub": true,
   "node": true
 }
+"globals": {
+  "require": false
+ }
