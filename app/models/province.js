@@ -15,14 +15,7 @@ var provinceSchema = new mongoose.Schema({
     }
 });
 
-provinceSchema.statics.getAll = function() {
-    return this.aggregate([
-        { $project: { _id: 0,
-            name : 1, boundaries: 1
-        }} ]);
-};
-
-provinceSchema.statics.get = function(bounds) {
+provinceSchema.statics.getAll = function(bounds) {
     var nw = bounds.nw.split(','),
         se = bounds.se.split(',');
 
