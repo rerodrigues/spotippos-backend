@@ -4,8 +4,8 @@
   "browser": true,
   "devel": true,
   "sub": true,
-  "node": true
+  "node": true,
+  "globals": {
+    "require": false
+   }
 }
-"globals": {
-  "require": false
- }
