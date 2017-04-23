@@ -9,6 +9,11 @@ var propertiesController = require('../controllers/properties'),
     provincesController  = require('../controllers/provinces');
 
 // Properties
+router.route('/').all(function(req, res) {
+    helpers.respondError(res, 403, "Forbidden");
+});
+
+// Properties
 router.route('/properties')
     .get(propertiesController.propertiesList)
     .put(propertiesController.propertyUpdate)
