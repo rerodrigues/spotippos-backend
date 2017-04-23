@@ -31,4 +31,12 @@ provinceSchema.statics.getAll = function(bounds) {
         }} ]);
 };
 
+provinceSchema.statics.get = function(name) {
+
+    return this.aggregate([
+        { $match: { name: name }}, { $limit: 1 },
+        { $project: { _id: 0, boundaries:1 }}
+    ]);
+};
+
 mongoose.model('Province', provinceSchema, 'provinces');

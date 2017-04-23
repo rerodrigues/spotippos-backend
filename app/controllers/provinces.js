@@ -22,3 +22,17 @@ module.exports.provincesList = function(req, res) {
     });
 
 };
+
+// Get a province with a given name
+module.exports.provinceRead = function(req, res) {
+
+    Province.get(req.params.name).exec(function(err, results){
+        if(err) {
+            helpers.respondError(res, 404, err.errmsg);
+        } else if (!results.length) {
+            helpers.respondError(res, 404, "Province nof found");
+        } else {
+            helpers.respondJson(res, 200, results[0]);
+        }
+    });
+};

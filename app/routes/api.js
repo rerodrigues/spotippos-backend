@@ -22,4 +22,7 @@ router.route('/properties/:id')
 router.route('/provinces')
     .get(provincesController.provincesList);
 
+router.route('/provinces/:name')
+    .get(provincesController.provinceRead);
+
 module.exports = router;
