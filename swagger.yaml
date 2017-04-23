@@ -1,0 +1,332 @@
+swagger: '2.0'
+
+info:
+  title: Spotipos Backend
+  description: Find your property in Spotipos with this legendary API
+  version: 1.0.0
+  contact:
+    name: Renato Rodrigues
+    url: 'https://about.me/renato.rodrigues'
+    email: renato@renatorodrigues.com
+host: spotipos-backend.herokuapp.com
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+
+paths:
+
+  /properties:
+    get:
+      summary: Lists all properties in bounds
+      description: |
+        The Properties endpoint returns information about the properties
+        offered at a given area or all properties if no area supplied.
+        The response includes the title and other details about each property,
+        and lists the properties in the proper display order.
+      tags:
+        - Properties
+
+      parameters:
+        - name: ax
+          description: Left coordinate of the area.
+          in: query
+          required: false
+          type: integer
+        - name: bx
+          description: Right coordinate of the area.
+          in: query
+          required: false
+          type: integer
+        - name: by
+          description: Bottom coordinate of the area.
+          in: query
+          required: false
+          type: integer
+        - name: ay
+          description: Top coordinate of the area.
+          in: query
+          required: false
+          type: integer
+
+      responses:
+        200:
+          description: A list of properties
+          schema:
+            $ref: '#/definitions/Properties'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Creates a property
+      description: |
+        This endpoint will create a property. _(Not implemented yet)_
+      tags:
+        - Properties
+
+      parameters:
+        - name: property
+          in: body
+          description: The new property information
+          required: true
+          schema:
+            $ref: '#/definitions/Property'
+
+      responses:
+        405:
+          description: Not implemented error
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Updates a property
+      description: |
+        This endpoint will update a property. _(Not implemented yet)_
+      tags:
+        - Properties
+
+      parameters:
+        - name: property
+          in: body
+          description: The updated property information
+          required: true
+          schema:
+            $ref: '#/definitions/Property'
+
+      responses:
+        405:
+          description: Not implemented error
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /properties/{id}:
+    get:
+      summary: Returns a single property
+      description: |
+        This endpoint returns information about a single property with a given
+        ID. The response includes the title and other details about this
+        property.
+      tags:
+        - Properties
+
+      parameters:
+        - name: id
+          in: path
+          description: ID of the property.
+          required: true
+          type: integer
+
+      responses:
+        200:
+          description: A property with the given ID
+          schema:
+            $ref: '#/definitions/Property'
+        404:
+          description: No properties found with the given ID
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      summary: Deletes a property
+      description: |
+        This endpoint will delete a property with the given ID. _(Not implemented yet)_
+      tags:
+        - Properties
+
+      parameters:
+        - name: id
+          in: path
+          description: ID of the property.
+          required: true
+          type: integer
+
+      responses:
+        405:
+          description: Not implemented error
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /provinces:
+    get:
+      summary: Lists provinces provinces in bounds
+      description: |
+        The Provinces endpoint returns information about the provinces
+        contained at a given bounds or all provinces if no bounds supplied.
+        The response includes the name and bounds of each province,
+        and lists the provinces in the proper display order.
+      tags:
+        - Provinces
+
+      parameters:
+        - name: nw
+          description: Northwest corner of the area.
+          in: query
+          required: false
+          type: string
+        - name: se
+          description: Southeast corner of the area.
+          in: query
+          required: false
+          type: string
+
+      responses:
+        200:
+          description: A list of provinces
+          schema:
+            $ref: '#/definitions/Provinces'
+        404:
+          description: No provinces found
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /provinces/{name}:
+    get:
+      summary: Returns a single province
+      description: |
+        This endpoint returns information about a single province with a given
+        name. The response includes the boundaries of the province.
+      tags:
+        - Provinces
+
+      parameters:
+        - name: name
+          in: path
+          description: Name of the province.
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: A province with the given name
+          schema:
+            $ref: '#/definitions/Province'
+        404:
+          description: No province found with the given name
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+
+  Properties:
+    required:
+      - foundProperties
+      - properties
+    type: object
+    properties:
+      foundProperties:
+        type: integer
+        description: Number of properties found
+      properties:
+        type: array
+        items:
+          $ref: '#/definitions/Property'
+
+  Property:
+    type: object
+    required:
+      - description
+      - title
+      - beds
+      - baths
+      - squareMeters
+      - price
+      - long
+      - lat
+    properties:
+      id:
+        type: integer
+        description: |
+          Unique identifier representing a specific property.
+      description:
+        type: string
+        description: Description of property.
+      title:
+        type: string
+        description: Title of property.
+      beds:
+        type: integer
+        description: Number of bedrooms.
+      baths:
+        type: integer
+        description: Number of bathrooms.
+      squareMeters:
+        type: integer
+        description: Total area of property.
+      price:
+        type: integer
+        description: Price of property.
+      long:
+        type: number
+        format: float
+        description: Longitude of property.
+      lat:
+        type: number
+        format: float
+        description: Latitude of property.
+
+  Provinces:
+    required:
+      - name
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Province'
+
+  Province:
+    required:
+      - boundaries
+    type: object
+    properties:
+      boundaries:
+        type: object
+        description: Boundaries of province
+        properties:
+          upperLeft:
+            $ref: '#/definitions/Coordinates'
+          bottomRight:
+            $ref: '#/definitions/Coordinates'
+
+  Coordinates:
+    required:
+      - x
+      - y
+    type: object
+    properties:
+      x:
+        type: integer
+      y:
+        type: integer
+
+  Error:
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      message:
+        type: string
