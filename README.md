@@ -33,26 +33,26 @@ MONGODB_URI="mongodb://<username>:<password>@<host>:<port>/<database>" npm run d
 
 ## API Endpoints
 
-| Endpoint                | Method | Description                     |
-|-------------------------|--------|---------------------------------|
-| /api/properties         | GET    | Lists all properties            |
-| /api/properties?:bounds | GET    | Lists properties between bounds |
-| /api/properties/:id     | GET    | Property details                |
-| /api/provinces          | GET    | Lists all provinces             |
-| /api/provinces/:nw/:se  | GET    | Lists provinces between bounds  |
+| Endpoint                 | Method | Description                     |
+|--------------------------|--------|---------------------------------|
+| /api/properties          | GET    | Lists all properties            |
+| /api/properties?{bounds} | GET    | Lists properties between bounds |
+| /api/properties/{id}     | GET    | Property details                |
+| /api/provinces           | GET    | Lists all provinces             |
+| /api/provinces?{nw}&{se} | GET    | Lists provinces between bounds  |
 
 _The remaining operations (create, update and delete) will be implemented in future versions._
 
 
 #### Parameters
 
-| Param   | Value                       |
-|---------|-----------------------------|
-| :bounds | ax=:ax&bx=:bx&by=:by&ay=:ay |
-| :nw     | :ax,ay                      |
-| :se     | :bx,by                      |
-
-Where 0 <= `x` <= 1400 and 0 <= `y` <= 1000
+| Param  | Value                       | Description                        |
+|--------|-----------------------------|------------------------------------|
+| bounds | ax={x}&bx={x}&ay={y}&by={y} | Right, Left, Top and Bottom coords |
+| nw     | {x},{y}                     | Northwest coordinates (x,y)        |
+| se     | {x},{y}                     | Southeast coordinates (x,y)        |
+| x      | 0 <= x <= 1400              | Longitude ranges (x)               |
+| y      | 0 <= y <= 1000              | Latitude ranges  (y)               |
 
 
 ## Using
