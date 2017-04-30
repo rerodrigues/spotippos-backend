@@ -83,30 +83,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-    put:
-      summary: Updates a property
-      description: |
-        This endpoint will update a property. _(Not implemented yet)_
-      tags:
-        - Properties
-
-      parameters:
-        - name: property
-          in: body
-          description: The updated property information
-          required: true
-          schema:
-            $ref: '#/definitions/Property'
-
-      responses:
-        405:
-          description: Not implemented error
-          schema:
-            $ref: '#/definitions/Error'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
 
   /properties/{id}:
     get:
@@ -132,6 +108,36 @@ paths:
             $ref: '#/definitions/Property'
         404:
           description: No properties found with the given ID
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      summary: Updates a property
+      description: |
+        This endpoint will update a property with the given ID. _(Not implemented yet)_
+      tags:
+        - Properties
+
+      parameters:
+        - name: id
+          in: path
+          description: ID of the property.
+          required: true
+          type: integer
+        - name: property
+          in: body
+          description: The updated property information
+          required: true
+          schema:
+            $ref: '#/definitions/Property'
+
+      responses:
+        405:
+          description: Not implemented error
           schema:
             $ref: '#/definitions/Error'
         default:
