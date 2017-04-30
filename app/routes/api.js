@@ -15,8 +15,8 @@ router.route('/').all(function(req, res) {
 
 // Properties
 router.route('/properties')
-    .get(propertiesController.propertiesList)
     .put(propertiesController.propertyUpdate)
+    .get(propertiesController.propertyList)
     .post(propertiesController.propertyCreate);
 
 router.route('/properties/:id')

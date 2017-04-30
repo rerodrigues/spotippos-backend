@@ -5,7 +5,7 @@ var helpers = require('../helpers.js'),
     Property = mongoose.model('Property');
 
 // List properties in given bounds
-module.exports.propertiesList = function(req, res) {
+module.exports.propertyList = function(req, res) {
 
     var bounds = (req.query.ax !== undefined && req.query.ay !== undefined && req.query.bx !== undefined && req.query.by !== undefined) ?
         { ax: req.query.ax, ay: req.query.ay, bx: req.query.bx, by: req.query.by } :
